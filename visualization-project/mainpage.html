@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+<title>The movie</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css'/>
+<body class="dashboard-page">
+	<section class="title-bar">
+		<div class="logo">
+			<h1><a href="index.html"><img src="images/logo.png" alt="" />Visulization Project</a></h1>
+		</div>
+		
+		<div style="float: right;">
+			<p>Student ID: 30367689</p>
+			<p>Student Name: Kewei Sun</p>
+		</div>
+		<div class="clearfix"><p style="
+			font-family: 'Pacifico';
+			font-weight: norma;
+			font-size: 100px;
+			text-align: center;
+			line-height: 1.4;
+			color: rgba(4, 89, 201, 0.83);
+		  "><a target="_blank" href = "https://www.themoviedb.org/">The Movie</a></p></div>
+		
+	</section>
+	<div class="main-grid">
+		<div class="agile-bottom-grids">
+			<div class="area-grids">
+				<a href="#">
+					<h1 class="title"><span>Introduction:</span></h1>
+				</a>
+				<p class="description">
+					Film is a combination of industry, technology and art. As an international mass media, it is bound to be closely related to the trend of world film art and the international film market. The artistic, economic and cultural features of films are closely related to people's lives. Therefore, no matter from the perspective of cultural communication or economic development, we need to conduct in-depth research on the development trend of films, so as to better promote the prosperity and development of films.
+				</p>
+			</div>
+		</div>
+		<div align="center" style="
+		white-space:nowrap;
+		margin-bottom: 30px;
+		font-family: 'Fjalla One', sans-serif;
+		font-size:190px;
+		color: #f7c319e3;
+		letter-spacing: -15px;
+		text-transform: uppercase;
+		">
+			<span>vote</span>
+			<img id = image src='images/votescore.png' width = "35%" height = "100%"  >
+			<span>score</span>
+		</div> 
+		
+		<div class="area-grids" >
+			<h2>The number of films produced and the best films in different periods: </h2>
+			<div align="center">
+				<iframe  src = "./piechart.html" width="1150" height="550" frameborder="no"  marginwidth="40" marginheight="30" scrolling="no" allowtransparency="yes"></iframe>
+			</div>
+			<p style="font-size: 13px; margin-left: 5%; opacity: 0.9;">@hint: if you haven't watch these movie please watch them. IT WORTH</p>
+		</div>
+		<div class="agile-bottom-grids">
+			<div class="area-grids">
+				<h2>Rank!!!</h2>
+				<div align="center">
+				<iframe src = "./barchart.html" width="1000" height="620" frameborder="no" marginwidth="0" marginheight="20" scrolling="no" allowtransparency="yes"></iframe>
+				</div>
+				<p style="font-size: 13px; margin-left: 5%; opacity: 0.9;">@hint: The right side bar chart show the rank in the period you have selected, the default rank is in 1910-1980 by popularity.</p>
+			</div>
+		</div>
+		<div class="agile-bottom-grids">
+			<div class="area-grids">
+				<h2>Budget with.....</h2>
+				<div align="center">
+				<iframe src = "./scatter.html" width="1000" height="620" frameborder="no" marginwidth="0" marginheight="20" scrolling="no" allowtransparency="yes"></iframe>
+				</div>
+				<p style="margin-left: 10%; margin-right: 10%;">
+					By observing the linear regression of film budget, revenue, runtime and popularity we can find that for most films, the budget has a positive effect in the box office. Although there is also a positive correlation between runtime and popularity, the effect is not so great.
+				</p>
+			</div>
+			
+		</div>
+
+			<div align="center" class="clearfix">@Dataset form 
+				<a  target="_blank" href=https://www.kaggle.com/tmdb/tmdb-movie-metadata?select=tmdb_5000_movies.csv >Kaggle</a>.</div>
+		</div>
+	</div>
+	</section>
+</body>
+</html>

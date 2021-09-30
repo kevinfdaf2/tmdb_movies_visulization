@@ -1,0 +1,167 @@
+/*custom font*/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+
+
+html, body{
+	font-family: montserrat, arial, verdana;
+    font-size: 100%;
+    overflow-x: hidden;
+    background: #f4f7f9;
+}
+body a{
+	transition: 0.5s all ease;
+	-webkit-transition: 0.5s all ease;
+	-moz-transition: 0.5s all ease;
+	-o-transition: 0.5s all ease;
+	-ms-transition: 0.5s all ease;
+	text-decoration:none;
+}
+h1,h2,h3,h4,h5,h6{
+	margin:0;			   
+}
+p{
+	margin:0;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover{
+	text-decoration:none;
+}
+
+.main-grid{
+    padding: 3em;
+}
+.dashboard-page .title-bar {
+    position: relative;
+    display: block;
+    background-color: #fff;
+    -webkit-box-shadow: 0 4px 10px -2px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px -2px rgba(0,0,0,0.05);
+    padding: 1em;
+}
+.logo {
+    float: left;
+    width: 15%;
+}
+.logo h1 a img {
+    margin-right: .5em;
+}
+.logo h1 a {
+    font-size: .9em;
+    color: #000;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.agileits-caption h4{
+    color: #FFFFFF;
+    font-size: 1.5em;
+    margin: 1.5em 0 .5em 0;
+}
+.agileits-caption p{
+    color: #FFFFFF;
+    font-size: 1em;
+    margin: 0;
+    line-height: 1.8em;	
+}
+.footer-icons  ul li a.dribbble{
+	background:#ea4c89;
+}
+.footer-icons  ul li a.twitter:hover{
+	background: #000000;
+}
+.area-grids{
+    border: 10px solid #ececec;
+    background: rgb(255, 255, 255);
+    padding: 1em;
+}
+.charts-right {
+    padding-left: 0;
+}
+.agile-Updating-grids,.agile-bottom-grid,.agile-last-grid{
+    border: 10px solid #d8d8d8;
+    background: #FFF;
+    padding: 1em;	
+}
+.agile-bottom-grids {
+    margin: 2em 0;
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    margin: 0;
+  }
+  
+  article,
+  details,
+  figure,
+  footer,
+  header,
+  hgroup,
+  main,d
+  menu,
+  nav,
+  section,
+  summary {
+    display: block;
+  }
+  
+  canvas,
+  progress,
+  video {
+    display: inline-block;
+    vertical-align: baseline;
+  }
+  audio:not([controls]) {
+    display: none;
+    height: 0;
+  }
+  [hidden],
+  
+  a {
+    background-color: transparent;
+  }
+  a:active,
+  
+  abbr[title] {
+    border-bottom: 1px dotted;
+  }
+  b,
+  strong {
+    font-weight: bold;
+  }
+  dfn {
+    font-style: italic;
+  }
+  h1 {
+    margin: .67em 0;
+    font-size: 2em;
+  }
+  
+  .clearfix:before,
+  .clearfix:after,
+  .modal-footer:after {
+    display: table;
+    content: " ";
+  }
+  .clearfix:after,
+  .modal-footer:after {
+    clear: both;
+  }
+    
+  .description {
+    font-size: 1.25rem;
+    line-height: 35px;
+    margin: 1rem 0 0 0;
+    position: relative;
+    z-index: 1;
+    margin: 1.5rem 50px 1.5rem 50px;
+  }

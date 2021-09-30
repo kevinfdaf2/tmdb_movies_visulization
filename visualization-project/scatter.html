@@ -1,0 +1,224 @@
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--improt the css js and data-->
+    <link rel="stylesheet" href="css/scatter.css">
+    <script src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <!--the div for the scatter plot -->
+        <div class="left-content">
+            <svg id='mian-svg'></svg>
+        </div>
+        <!--the div for the detail box-->
+        <div class="right-content">
+            <div id='textarea'></div>
+        </div>
+        <!--the select buttion -->
+        <select class="key-select">
+        </select>
+    </div>
+</body>
+<html>
+
+<script>
+    function get_svg(id) {
+    // set the svg
+    let svg = d3.select('#' + id);
+    let width = 500;
+    let height = 500;
+    return [
+        svg,
+        width,
+        height
+    ]
+}
+// drow the scatter plot
+class Chart {
+    constructor(id, data) {
+        // set the select button context and the data for the regression line
+        let y_keys = ['popularity', 'revenue', 'runtime'];
+        let x_key = 'budget';
+        let y_key_lines = {
+            'popularity': [[90, 43.77519999999998], [380, 149.7072]],
+            'revenue': [[90, 127.25095], [380, 1743.62315]],
+            'runtime': [[90, 126.506], [370, 140.89600000000002]],
+        }
+        // format the data format
+        this.data = this.preData(data, x_key, y_keys);
+        let [svg, w, h] = get_svg(id);
+        this.textArea = new TextArea('textarea');
+        let g = svg.append("g");
+        // when change the y-axis using select button
+        this.updateChart(g, w, h, x_key, y_keys[0], y_key_lines[y_keys[0]]);
+        this.textArea.updateChart(data[0]);
+        // select buttion
+        d3.select('.key-select')
+            .html(
+                () => {
+                    let html = '';
+                    y_keys.forEach(d => {
+                        // selection
+                        let s = `<option value ="${d}">${d}</option>`;
+                        html += s;
+                    });
+                    return html;
+                }
+            )
+            // add change function
+            .on("change", () => {
+                let y_key = $('.key-select option:selected').val();
+                this.updateChart(g, w, h, x_key, y_key, y_key_lines[y_key]);
+            });
+    }
+    // data format
+    preData(data, x_key, y_keys) {
+        let ret = data.map(d => {
+            for (let key of y_keys) {
+                d[key] = parseFloat(d[key]);
+            }
+            d[x_key] = parseInt(d[x_key]);
+            return d;
+        });
+        return ret;
+    }
+    // update the plot
+    updateChart(g, w, h, x_key, y_key, line) {
+        g.selectAll("g").remove();
+        g = g.append("g");
+        //set margin
+        let margin = {
+            left: 70,
+            right: 10,
+            top: 40,
+            bottom: 30
+        };
+        let data = this.data;
+        // set x-axis and y-axis 
+        var scale_x = d3.scaleLinear()
+            .domain([90, d3.max(data, d => d[x_key])])
+            .range([0, w - margin.left - margin.right]);
+        var scale_y = d3.scaleLinear()
+            .domain([0, d3.max(data, d => d[y_key])])
+            .range([h - margin.top - margin.bottom, 0]);
+        g.append("g")
+            .call(d3.axisBottom(scale_x))
+            .attr("transform", `translate(${margin.left}, ${h - margin.bottom})`);
+        g.append("g")
+            .call(d3.axisLeft(scale_y))
+            .attr("transform", `translate(${margin.left}, ${margin.top})`)
+            .selectAll("text");
+        // x
+        g.append("g")
+            .append("text")
+            .text(() => {
+                // the display value in select button is different with the data column names
+                if (y_key == 'runtime') {
+                    return 'Runtime(min)';
+                }
+                if (y_key == 'revenue') {
+                    return 'Revenue(million)'
+                }
+                if (y_key == 'popularity') {
+                    return 'Popularity(million)'
+                }
+                return y_key + ' million';
+            })
+            .attr("transform", `translate(${margin.left + 70}, ${margin.top - 25})`)
+            .attr("dy", "1em")
+            .attr("text-anchor", "end")
+            .style("font-size", '14px');
+        // set the x-axis (defualt)
+        g.append("g")
+            .append("text")
+            .text('Budget(million)')
+            .attr("transform", `translate(${w - margin.right / 2.0}, ${h - margin.bottom * 2})`)
+            .attr("dy", "1em")
+            .attr("text-anchor", "end")
+            .style("font-size", '14px');
+
+        // apppend the cirles into svg
+        let circles = g.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`)
+            .selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", d => scale_x(d[x_key]))
+            .attr("cy", d => scale_y(d[y_key]))
+            .attr("r", 5)
+            .attr("fill", '#187DBD')
+            .attr("stroke", '#ccc')
+            .attr("stroke-width", 1.5);
+
+        // add title (tooltip)
+        circles.append("title")
+            .text(d => d.title);
+
+        // draw the regression line
+        g.append("g")
+            .attr("transform", `translate(${margin.left}, ${margin.top})`)
+            .append("line")
+            .attr("x1", scale_x(line[0][0]))
+            .attr("y1", scale_y(line[0][1]))
+            .attr("x2", scale_x(line[1][0]))
+            .attr("y2", scale_y(line[1][1]))
+            .attr("stroke", '#e41a1c')
+            .attr("stroke-width", 2);
+
+        // add the over, out and click function 
+        let _this = this;
+        circles.on("mouseover", function (d) {
+            circles.attr("opacity", 0.5);
+            d3.select(this).attr("r", 8).attr("stroke", '#000').attr("opacity", 1);
+            // _this.textArea.updateChart(d);
+        }).on("mouseout", function () {
+            circles.attr("opacity", 1);
+            d3.select(this).attr("r", 5).attr("stroke", '#ccc');
+        });
+        circles.on("click", function (d) {
+            _this.textArea.updateChart(d);
+        });
+    }
+}
+
+class TextArea {
+    constructor(id) {
+        this.div = d3.select('#' + id);
+    }
+    //change the detail box
+    updateChart(data) {
+        let html = `
+            <p class='title'><a target="_blank" href="${data.homepage}">${data.title}</a></p>
+            <p class='areatext'><label class='subtitle'>Vote Average:</label> ${data.vote_average}</p>
+            <p class='areatext'><label class='subtitle'>Budget:</label> ${data.budget} (million)</p>
+            <p class='areatext'><label class='subtitle'>Original Language:</label> ${data.original_language}</p>
+            <p class='areatext'><label class='subtitle'>Popularity:</label> ${data.popularity.toFixed(2)}</p>
+            <p class='areatext'><label class='subtitle'>Production Companies:</label> ${data.production_companies}</p>
+            <p class='areatext'><label class='subtitle'>Production Countries:</label> ${data.production_countries}</p>
+            <p class='areatext'><label class='subtitle'>Release Date:</label> ${data.release_date}</p>
+            <p class='areatext'><label class='subtitle'>Revenue:</label> ${data.revenue.toFixed(2)} (million)</p>
+            <p class='areatext'><label class='subtitle'>Runtime:</label> ${data.runtime} (min)</p>
+        `;
+        this.div.html(html);
+    }
+}
+
+const main = async () => {
+    // read the data
+    let data = await d3.csv("data/scatter.csv");
+    new Chart('mian-svg', data);
+}
+
+main();
+</script>

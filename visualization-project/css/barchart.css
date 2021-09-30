@@ -1,0 +1,50 @@
+
+/*custom font*/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+body {
+font-family: montserrat, arial, verdana;
+}
+
+.selectButton {
+  width: 170px;
+  height: 37px; 
+  position: fixed;
+  left: 140px;
+  top: 23px;
+  padding: 0px 38px;
+  color: #FFFFFF;
+  background-color: #F32C52; /* Green */
+  border: none;
+  font-size: 14px; 
+  font-family: monospace;
+  border-radius: 22px;
+}
+
+.selectButton1 {
+  width: 250px;
+  height: 37px; 
+  position: fixed;
+  left: 610px;
+  top: 23px;
+  padding: 0px 40px;
+  font-family: monospace;
+  line-height: 1;
+  color: #FFFFFF;
+  background-color: #F32C52; /* Green */
+  border: none;
+  font-size: 14px; 
+  border-radius: 22px;
+}
+
+.genre {
+    position: fixed;
+    left: 20px;
+    top: 10px"
+}
+
+.rank {
+    position: fixed;
+    left: 450px;
+    top: 10px"
+}

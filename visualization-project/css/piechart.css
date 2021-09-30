@@ -1,0 +1,37 @@
+
+/*custom font*/
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+body {
+font-family: montserrat, arial, verdana;
+}
+
+.my_dataviz {
+    position:fixed;
+    left: 10px;
+    top: 65px
+}
+
+.info {
+    position: fixed;
+    left: 550px;
+    top: 5px"
+}
+
+.post {
+    width: 400px;
+    height: 250px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    box-shadow: 5px 5px 19px #ccc;
+}
+
+.pixel {
+    width: 390px;
+    height: auto;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 5px 5px 10px #ccc;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 13px;
+  }
